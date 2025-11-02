@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Écran de démarrage</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      width: 100%;
+      background: url("fondoapp.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+    }
+
+    /* Fondo con leve opacidad para efecto de profundidad */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 0;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 3rem;
+      text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+      z-index: 1;
+      margin-bottom: 40px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Botón caricaturesco */
+    .start-btn {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(45deg, #FFD93D, #FF6B6B, #FFD93D);
+      color: #111;
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 20px 50px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .start-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.6);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      color: #fff;
+      font-size: 0.9rem;
+      z-index: 1;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Les réseaux du futur</h1>
+  <button class="start-btn" id="startButton">Commencer le jeu</button>
+
+  <footer>© 2025 Projet pédagogique</footer>
+
+  <!-- Audio de fondo estilo videojuego -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_96fc7923a7.mp3?filename=retro-game-music-117418.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const startButton = document.getElementById("startButton");
+    const bgMusic = document.getElementById("bgMusic");
+
+    startButton.addEventListener("click", () => {
+      // Reproducir música (al hacer clic, permitido por navegadores)
+      bgMusic.volume = 0.5;
+      bgMusic.play();
+
+      // Animación de salida
+      startButton.textContent = "Chargement...";
+      startButton.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        window.location.href = "https://jeufra.netlify.app/";
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
