@@ -138,19 +138,33 @@
   </audio>
 
   <script>
-    const startButton = document.getElementById("startButton");
-    const bgMusic = document.getElementById("bgMusic");
+  const startButton = document.getElementById("startButton");
+  const bgMusic = document.getElementById("bgMusic");
 
-    startButton.addEventListener("click", () => {
-      bgMusic.volume = 0.5;
-      bgMusic.play();
+  // 🎵 Intentar reproducir música al cargar la página
+  window.addEventListener("DOMContentLoaded", () => {
+    bgMusic.volume = 0.5;
+    const playPromise = bgMusic.play();
 
-      startButton.textContent = "Chargement...";
-      startButton.style.transform = "scale(0.95)";
-      setTimeout(() => {
-        window.location.href = "https://jeufra.netlify.app/";
-      }, 1500);
-    });
-  </script>
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        console.log("🔇 La reproducción automática fue bloqueada. Se activará al hacer clic.");
+      });
+    }
+  });
+
+  // ▶️ Acción al presionar el botón "Iniciar"
+  startButton.addEventListener("click", () => {
+    bgMusic.volume = 0.5;
+    bgMusic.play();
+
+    startButton.textContent = "Chargement...";
+    startButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+      window.location.href = "https://jeufra.netlify.app/";
+    }, 1500);
+  });
+</script>
+
 </body>
 </html>
